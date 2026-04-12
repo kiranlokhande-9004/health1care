@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Leaf } from "lucide-react";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
+import logo from "@/assets/logo.jpg";
 
 export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-            <Leaf className="w-5 h-5 text-primary-foreground" />
-          </div>
+          <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
           <span className="font-display text-xl font-bold text-foreground">NutriNest</span>
         </Link>
 
@@ -19,7 +18,8 @@ export function Navbar() {
           <a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <DarkModeToggle />
           <Link to="/auth">
             <Button variant="ghost" size="sm">Log in</Button>
           </Link>

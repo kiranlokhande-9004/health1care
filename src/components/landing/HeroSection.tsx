@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import heroBg from "@/assets/hero-bg.png";
 
 export function HeroSection() {
   return (
@@ -63,35 +64,20 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Dashboard preview mockup */}
+        {/* Hero image */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="mt-16 max-w-4xl mx-auto"
+          className="mt-16 max-w-5xl mx-auto"
         >
-          <div className="relative rounded-2xl border bg-card shadow-2xl shadow-primary/10 overflow-hidden p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-destructive/60" />
-              <div className="w-3 h-3 rounded-full bg-accent/60" />
-              <div className="w-3 h-3 rounded-full bg-primary/60" />
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {["Breakfast", "Lunch", "Dinner"].map((meal, i) => (
-                <div key={meal} className="rounded-xl bg-secondary/50 p-4">
-                  <div className="text-xs font-medium text-muted-foreground mb-2">{meal}</div>
-                  <div className="h-3 w-3/4 bg-primary/20 rounded mb-2" />
-                  <div className="h-2 w-1/2 bg-muted-foreground/10 rounded mb-3" />
-                  <div className="flex gap-2">
-                    {[...Array(3)].map((_, j) => (
-                      <div key={j} className="h-6 w-12 rounded-md bg-primary/10 text-[10px] flex items-center justify-center text-primary font-medium">
-                        {["320cal", "18g P", "42g C"][j]}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/10">
+            <img
+              src={heroBg}
+              alt="NutriNest AI Dashboard — meal planning, nutrition tracking, and recipes for families"
+              className="w-full h-auto rounded-2xl"
+            />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-foreground/5" />
           </div>
         </motion.div>
       </div>
