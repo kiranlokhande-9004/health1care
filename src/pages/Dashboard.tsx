@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Leaf, CalendarDays, ShoppingCart, Users, BarChart3, LogOut, Menu, X } from "lucide-react";
+import { CalendarDays, ShoppingCart, Users, BarChart3, LogOut, Menu, X } from "lucide-react";
+import logo from "@/assets/logo.jpg";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { Button } from "@/components/ui/button";
 import { MealPlanView } from "@/components/dashboard/MealPlanView";
 import { GroceryListView } from "@/components/dashboard/GroceryListView";
@@ -40,9 +42,7 @@ export default function Dashboard() {
       <aside className="hidden lg:flex w-64 border-r bg-card flex-col">
         <div className="p-6 border-b">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-xl font-bold">NutriNest</span>
           </Link>
         </div>
