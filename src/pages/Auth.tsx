@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Leaf, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 import { Link } from "react-router-dom";
 
 export default function Auth() {
