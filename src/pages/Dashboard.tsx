@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Leaf, CalendarDays, ShoppingCart, Users, BarChart3, LogOut, Menu, X } from "lucide-react";
+import { CalendarDays, ShoppingCart, Users, BarChart3, LogOut, Menu, X } from "lucide-react";
+import logo from "@/assets/logo.jpg";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { Button } from "@/components/ui/button";
 import { MealPlanView } from "@/components/dashboard/MealPlanView";
 import { GroceryListView } from "@/components/dashboard/GroceryListView";
@@ -40,9 +42,7 @@ export default function Dashboard() {
       <aside className="hidden lg:flex w-64 border-r bg-card flex-col">
         <div className="p-6 border-b">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-xl font-bold">NutriNest</span>
           </Link>
         </div>
@@ -64,7 +64,11 @@ export default function Dashboard() {
           ))}
         </nav>
 
-        <div className="p-4 border-t">
+        <div className="p-4 border-t space-y-1">
+          <div className="flex items-center justify-between px-4 py-2">
+            <span className="text-sm text-muted-foreground">Theme</span>
+            <DarkModeToggle />
+          </div>
           <Button variant="ghost" className="w-full justify-start text-muted-foreground" onClick={() => navigate("/")}>
             <LogOut className="w-4 h-4 mr-2" />
             Log out
@@ -76,9 +80,7 @@ export default function Dashboard() {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-card border-b">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-lg font-bold">NutriNest</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
