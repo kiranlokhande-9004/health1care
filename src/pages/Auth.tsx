@@ -28,9 +28,7 @@ export default function Auth() {
 
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-hero-gradient flex items-center justify-center">
-            <Leaf className="w-6 h-6 text-primary-foreground" />
-          </div>
+          <img src={logo} alt="NutriNest AI" className="w-10 h-10 rounded-xl object-cover" />
           <span className="font-display text-2xl font-bold text-foreground">NutriNest</span>
         </Link>
 
