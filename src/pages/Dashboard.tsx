@@ -76,9 +76,7 @@ export default function Dashboard() {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-card border-b">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-lg font-bold">NutriNest</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
