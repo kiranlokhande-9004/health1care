@@ -64,7 +64,11 @@ export default function Dashboard() {
           ))}
         </nav>
 
-        <div className="p-4 border-t">
+        <div className="p-4 border-t space-y-1">
+          <div className="flex items-center justify-between px-4 py-2">
+            <span className="text-sm text-muted-foreground">Theme</span>
+            <DarkModeToggle />
+          </div>
           <Button variant="ghost" className="w-full justify-start text-muted-foreground" onClick={() => navigate("/")}>
             <LogOut className="w-4 h-4 mr-2" />
             Log out
