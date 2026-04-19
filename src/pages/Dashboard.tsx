@@ -8,6 +8,7 @@ import { MealPlanView } from "@/components/dashboard/MealPlanView";
 import { GroceryListView } from "@/components/dashboard/GroceryListView";
 import { FamilyProfilesView } from "@/components/dashboard/FamilyProfilesView";
 import { NutritionView } from "@/components/dashboard/NutritionView";
+import { AIMealPlannerDialog } from "@/components/dashboard/AIMealPlannerDialog";
 import { useAuth } from "@/hooks/useAuth";
 
 const tabs = [
@@ -107,6 +108,9 @@ export default function Dashboard() {
       {/* Main content */}
       <main className="flex-1 lg:pt-0 pt-16">
         <div className="p-6 md:p-8">
+          <div className="flex justify-end mb-4">
+            <AIMealPlannerDialog />
+          </div>
           {activeTab === "meals" && <MealPlanView />}
           {activeTab === "grocery" && <GroceryListView />}
           {activeTab === "family" && <FamilyProfilesView />}
