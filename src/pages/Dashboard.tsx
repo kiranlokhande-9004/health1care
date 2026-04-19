@@ -8,6 +8,7 @@ import { MealPlanView } from "@/components/dashboard/MealPlanView";
 import { GroceryListView } from "@/components/dashboard/GroceryListView";
 import { FamilyProfilesView } from "@/components/dashboard/FamilyProfilesView";
 import { NutritionView } from "@/components/dashboard/NutritionView";
+import { AIMealPlannerDialog } from "@/components/dashboard/AIMealPlannerDialog";
 import { useAuth } from "@/hooks/useAuth";
 
 const tabs = [
