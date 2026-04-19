@@ -108,6 +108,9 @@ export default function Dashboard() {
       {/* Main content */}
       <main className="flex-1 lg:pt-0 pt-16">
         <div className="p-6 md:p-8">
+          <div className="flex justify-end mb-4">
+            <AIMealPlannerDialog />
+          </div>
           {activeTab === "meals" && <MealPlanView />}
           {activeTab === "grocery" && <GroceryListView />}
           {activeTab === "family" && <FamilyProfilesView />}
