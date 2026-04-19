@@ -8,11 +8,10 @@ import { MealPlanView } from "@/components/dashboard/MealPlanView";
 import { GroceryListView } from "@/components/dashboard/GroceryListView";
 import { FamilyProfilesView } from "@/components/dashboard/FamilyProfilesView";
 import { NutritionView } from "@/components/dashboard/NutritionView";
-import { mockWeekPlan, mockGroceryList, mockFamilyMembers } from "@/lib/mock-data";
-import { GroceryItem, FamilyMember } from "@/lib/types";
+import { useAuth } from "@/hooks/useAuth";
 
 const tabs = [
-  { id: "meals", label: "Meal Plans", icon: CalendarDays },
+  { id: "meals", label: "Meals", icon: CalendarDays },
   { id: "grocery", label: "Grocery List", icon: ShoppingCart },
   { id: "family", label: "Family", icon: Users },
   { id: "nutrition", label: "Nutrition", icon: BarChart3 },
@@ -22,18 +21,13 @@ type TabId = (typeof tabs)[number]["id"];
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<TabId>("meals");
-  const [selectedDay, setSelectedDay] = useState(0);
-  const [groceryList, setGroceryList] = useState<GroceryItem[]>(mockGroceryList);
-  const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>(mockFamilyMembers);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { signOut, user } = useAuth();
 
-  const toggleGroceryItem = (id: string) => {
-    setGroceryList((prev) => prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item)));
-  };
-
-  const removeFamilyMember = (id: string) => {
-    setFamilyMembers((prev) => prev.filter((m) => m.id !== id));
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/", { replace: true });
   };
 
   return (
@@ -45,6 +39,7 @@ export default function Dashboard() {
             <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-xl font-bold">NutriNest</span>
           </Link>
+          {user?.email && <p className="text-xs text-muted-foreground mt-2 truncate">{user.email}</p>}
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
@@ -53,9 +48,7 @@ export default function Dashboard() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                activeTab === tab.id
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-secondary"
+                activeTab === tab.id ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"
               }`}
             >
               <tab.icon className="w-5 h-5" />
@@ -69,7 +62,7 @@ export default function Dashboard() {
             <span className="text-sm text-muted-foreground">Theme</span>
             <DarkModeToggle />
           </div>
-          <Button variant="ghost" className="w-full justify-start text-muted-foreground" onClick={() => navigate("/")}>
+          <Button variant="ghost" className="w-full justify-start text-muted-foreground" onClick={handleLogout}>
             <LogOut className="w-4 h-4 mr-2" />
             Log out
           </Button>
@@ -83,9 +76,12 @@ export default function Dashboard() {
             <img src={logo} alt="NutriNest AI" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-display text-lg font-bold">NutriNest</span>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          <div className="flex items-center gap-2">
+            <DarkModeToggle />
+            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
+          </div>
         </div>
         {mobileMenuOpen && (
           <nav className="p-4 border-t space-y-1">
@@ -101,6 +97,9 @@ export default function Dashboard() {
                 {tab.label}
               </button>
             ))}
+            <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-secondary">
+              <LogOut className="w-5 h-5" /> Log out
+            </button>
           </nav>
         )}
       </div>
@@ -108,10 +107,10 @@ export default function Dashboard() {
       {/* Main content */}
       <main className="flex-1 lg:pt-0 pt-16">
         <div className="p-6 md:p-8">
-          {activeTab === "meals" && <MealPlanView weekPlan={mockWeekPlan} selectedDay={selectedDay} onDayChange={setSelectedDay} />}
-          {activeTab === "grocery" && <GroceryListView items={groceryList} onToggle={toggleGroceryItem} />}
-          {activeTab === "family" && <FamilyProfilesView members={familyMembers} onRemove={removeFamilyMember} />}
-          {activeTab === "nutrition" && <NutritionView weekPlan={mockWeekPlan} selectedDay={selectedDay} />}
+          {activeTab === "meals" && <MealPlanView />}
+          {activeTab === "grocery" && <GroceryListView />}
+          {activeTab === "family" && <FamilyProfilesView />}
+          {activeTab === "nutrition" && <NutritionView />}
         </div>
       </main>
     </div>
