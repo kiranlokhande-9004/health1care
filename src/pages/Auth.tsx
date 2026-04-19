@@ -66,7 +66,7 @@ export default function Auth() {
       }
     } catch (err: any) {
       console.error("[auth] error:", err);
-      toast.error(err?.message ?? "Authentication failed");
+      toast.error(isLogin ? "Invalid email or password." : "Could not create account. Please try again.");
     } finally {
       setSubmitting(false);
     }
