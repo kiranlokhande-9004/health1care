@@ -32,11 +32,11 @@ export async function getAll<T = any>(
   table: TableName,
   options: QueryOptions = {},
 ): Promise<T[]> {
-  let query = supabase.from(table).select("*");
+  let query: any = (supabase as any).from(table).select("*");
 
   if (options.filters) {
     for (const [k, v] of Object.entries(options.filters)) {
-      query = query.eq(k, v as any);
+      query = query.eq(k, v);
     }
   }
   if (options.search?.query) {
@@ -61,7 +61,7 @@ export async function getAll<T = any>(
 }
 
 export async function getById<T = any>(table: TableName, id: string): Promise<T | null> {
-  const { data, error } = await supabase.from(table).select("*").eq("id", id).maybeSingle();
+  const { data, error } = await (supabase as any).from(table).select("*").eq("id", id).maybeSingle();
   if (error) {
     console.error(`[db] getById(${table}, ${id}) failed:`, error);
     throw error;
@@ -75,7 +75,7 @@ export async function createRecord<T = any>(
 ): Promise<T> {
   const userId = await requireUserId();
   const payload = { ...values, user_id: values.user_id ?? userId };
-  const { data, error } = await supabase.from(table).insert(payload as any).select().single();
+  const { data, error } = await (supabase as any).from(table).insert(payload).select().single();
   if (error) {
     console.error(`[db] createRecord(${table}) failed:`, error, payload);
     throw error;
@@ -88,9 +88,9 @@ export async function updateRecord<T = any>(
   id: string,
   values: Record<string, any>,
 ): Promise<T> {
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from(table)
-    .update(values as any)
+    .update(values)
     .eq("id", id)
     .select()
     .single();
@@ -102,7 +102,7 @@ export async function updateRecord<T = any>(
 }
 
 export async function removeRecord(table: TableName, id: string): Promise<void> {
-  const { error } = await supabase.from(table).delete().eq("id", id);
+  const { error } = await (supabase as any).from(table).delete().eq("id", id);
   if (error) {
     console.error(`[db] removeRecord(${table}, ${id}) failed:`, error);
     throw error;
